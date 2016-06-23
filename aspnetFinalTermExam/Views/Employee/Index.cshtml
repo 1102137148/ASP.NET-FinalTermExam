@@ -1,13 +1,13 @@
 ﻿@model aspnetFinalTermExam.Models.SearchArg
 
 @{
-    ViewBag.Title = "1102137148";
+    ViewBag.Title = "1102137148柯妤蓁";
 }
 
 <h2>Index</h2>
 
 
-@using (Html.BeginForm("Index", "Search", FormMethod.Post, new { id = "Form1" })) 
+@using (Html.BeginForm("Index", "Employee/Index", FormMethod.Post, new { id = "Form1" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -40,8 +40,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.HireDate, new { @type = "date" })
             </div>
         </div>
 
@@ -55,6 +54,53 @@
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+<div id="SearchResultSection">
+    @if (ViewBag.SearchResult != null)
+    {
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>訂單編號</td>
+                <td>客戶名稱</td>
+                <td>訂購日期</td>
+                <td>發貨日期</td>
+                <td></td>
+                <td></td>
+            </tr>
+            @foreach (var item in (List<aspnetFinalTermExam.Models.Employee>)ViewBag.SearchResult)
+            {
+                <tr id='@item.EmployeeID'>
+                    <td>@item.FirstName</td>
+                    <td>@item.Title</td>
+                    <td>@item.HireDate</td>
+                    <td>@item.BirthDate</td>
+                    <td>@Html.ActionLink("修改", "Update", new { id = item.EmployeeID })</td>
+                    <td>
+                        <a class="btnDelete" href="#">刪除</a>
+                        <input class="hidOrderId" type="hidden" value='@item.EmployeeID' />
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(".btnDelete").click(function (e) {
+            console.log("delete");
+            var tr = $(this).closest('tr')
+            $.ajax({
+                type: "POST",
+                url: "/Search/DeleteOrder",
+                data: "orderId=" + $(this).next().val(),
+                dataType: "json",
+                success: function (response) {
+                    $(tr).remove();
+                }
+            });
+            return false;
+        });
+
+    </script>
 }

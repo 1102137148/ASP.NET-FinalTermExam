@@ -45,5 +45,11 @@ namespace aspnetFinalTermExam.Models
         /// </summary>
         [DisplayName("任職日期")]
         public DateTime? HireDate { get; set; }
+
+        /// <summary>
+        /// 生日
+        /// </summary>
+        [DisplayName("生日")]
+        public DateTime? BirthDate { get; set; }
     }
 }
