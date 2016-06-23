@@ -21,11 +21,11 @@ namespace aspnetFinalTermExam.Models
                 System.Configuration.ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString.ToString();
         }
 
-        /// <summary>
+        /*/// <summary>
         /// 依照條件取得員工資料
         /// </summary>
         /// <returns></returns>
-        public List<Models.Order> GetOrderByCondtioin(Models.SearchArg arg)
+        public List<Models.Employee> GetOrderByCondtioin(Models.SearchArg arg)
         {
 
             DataTable dt = new DataTable();
@@ -35,8 +35,8 @@ namespace aspnetFinalTermExam.Models
 					A.Gender,A.BirthDate,A.HireDate
 					From HR.Employees As A 
 					INNER JOIN dbo.CodeTable As B ON A.title=B.CodeID
-					Where (B.Companyname Like @CustName Or @CustName='') AND 
-						  (A.OrderId=@OrderId Or @OrderId='') AND
+					Where (EmpName Like @FirstName Or @FirstName='' Or @LastName Or @LastName='') AND 
+						  (A.EmployeeID=@EmployeeID Or @EmployeeID='') AND
                           (A.EmployeeID=@EmployeeID Or @EmployeeID='') AND
                           (A.ShipperID=@ShipperID Or @ShipperID='') AND
                           (A.ShippedDate=@ShippedDate Or @ShippedDate='') AND
@@ -48,9 +48,9 @@ namespace aspnetFinalTermExam.Models
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.Add(new SqlParameter("@OrderId", arg.OrderId == null ? default(int) : arg.OrderId));
-                cmd.Parameters.Add(new SqlParameter("@CustName", arg.CustName == null ? string.Empty : arg.CustName));
-                cmd.Parameters.Add(new SqlParameter("@EmployeeID", arg.EmpId == null ? default(int) : arg.EmpId));
+                cmd.Parameters.Add(new SqlParameter("@EmployeeID", arg.EmployeeID == null ? default(int) : arg.EmployeeID));
+                cmd.Parameters.Add(new SqlParameter("@FirstName", arg.FirstName == null ? string.Empty : arg.FirstName));
+                cmd.Parameters.Add(new SqlParameter("@LastName", arg.LastName == null ? string.Empty : arg.LastName));
                 cmd.Parameters.Add(new SqlParameter("@ShipperId", arg.ShipperId == null ? string.Empty : arg.ShipperId));
                 cmd.Parameters.Add(new SqlParameter("@OrderDate", arg.OrderDate == null ? string.Empty : arg.OrderDate));
                 cmd.Parameters.Add(new SqlParameter("@ShippedDate", arg.ShippedDate == null ? string.Empty : arg.ShippedDate));
@@ -65,7 +65,7 @@ namespace aspnetFinalTermExam.Models
             return this.MapOrderDataToList(dt);
         }
 
-        private List<Models.Order> MapOrderDataToList(DataTable orderData)
+        private List<Models.Employee> MapOrderDataToList(DataTable orderData)
         {
             List<Models.Order> result = new List<Order>();
 
@@ -93,6 +93,6 @@ namespace aspnetFinalTermExam.Models
                 });
             }
             return result;
-        }
+        }*/
     }
 }

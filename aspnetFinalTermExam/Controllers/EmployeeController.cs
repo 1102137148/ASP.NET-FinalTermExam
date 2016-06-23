@@ -19,8 +19,8 @@ namespace aspnetFinalTermExam.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            ViewBag.EmpCodeData = this.CodeService.GetEmp();
-            ViewBag.EmpTitleData = this.CodeService.GetEmpTitle();
+            ViewBag.EmpCodeData = this.codeService.GetEmp();
+            ViewBag.EmpTitleData = this.codeService.GetEmpTitle();
             return View();
         }
 
@@ -32,8 +32,8 @@ namespace aspnetFinalTermExam.Controllers
         [HttpPost()]
         public ActionResult SearchOrder(Models.SearchArg sorder)
         {
-            ViewBag.EmpCodeData = this.CodeService.GetEmp();
-            ViewBag.SearchResult = orderService.GetOrderByCondtioin(sorder);
+            ViewBag.EmpCodeData = this.codeService.GetEmp();
+            //ViewBag.SearchResult = employeeService.GetOrderByCondtioin(sorder);
             return View("SearchOrder");
         }
     }

@@ -48,7 +48,7 @@ namespace aspnetFinalTermExam.Models
         public List<SelectListItem> GetEmpTitle()
         {
             DataTable dt = new DataTable();
-            string sql = @"Select A.Title As CodeId,A.Title+'-'+B.CodeVal As CodeName FROM HR.Employees As A INNER JOIN dbo.CodeTable As B ON A.title=B.CodeID";
+            string sql = @"Select CodeId As CodeId,CodeId+'-'+CodeVal As CodeName FROM dbo.CodeTable where Codetype='TITLE'";
             using (SqlConnection conn = new SqlConnection(this.GetDBConnectionString()))
             {
                 conn.Open();
