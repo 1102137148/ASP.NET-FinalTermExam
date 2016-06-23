@@ -51,8 +51,8 @@ namespace aspnetFinalTermExam.Models
                 cmd.Parameters.Add(new SqlParameter("@FirstName", arg.FirstName == null ? string.Empty : arg.FirstName));
                 cmd.Parameters.Add(new SqlParameter("@LastName", arg.LastName == null ? string.Empty : arg.LastName));
                 cmd.Parameters.Add(new SqlParameter("@Title", arg.Title == null ? string.Empty : arg.Title));
-                //cmd.Parameters.Add(new SqlParameter("@HireDate", arg.HireDate == null ? string.Empty : arg.HireDate));
-                //cmd.Parameters.Add(new SqlParameter("@BirthDate", arg.BirthDate == null ? string.Empty : arg.BirthDate));
+                cmd.Parameters.Add(new SqlParameter("@HireDate", arg.HireDate == null ? string.Empty : arg.HireDate));
+                cmd.Parameters.Add(new SqlParameter("@BirthDate", arg.BirthDate == null ? string.Empty : arg.BirthDate));
 
                 SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
                 sqlAdapter.Fill(dt);

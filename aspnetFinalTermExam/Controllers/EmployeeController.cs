@@ -33,7 +33,7 @@ namespace aspnetFinalTermExam.Controllers
         public ActionResult SearchOrder(Models.SearchArg sorder)
         {
             ViewBag.EmpCodeData = this.codeService.GetEmp();
-            //ViewBag.SearchResult = employeeService.GetEmpByCondtioin(sorder);
+            ViewBag.SearchResult = employeeService.GetEmpByCondtioin(sorder);
             return View("SearchOrder");
         }
     }
